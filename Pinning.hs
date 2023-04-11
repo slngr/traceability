@@ -13,7 +13,7 @@ import           Plutus.V2.Ledger.Contexts (txSignedBy)
 import           PlutusTx                  (compile, unstableMakeIsData)
 import           PlutusTx.Prelude          (Integer, Bool (True, False), otherwise, ($))
 import           Prelude                   (IO)
-import           Utilities                 (wrap,
+import           Utilities                 (wrapValidator,
                                             writeValidatorToFile)
 
 -- ON-CHAIN VALIDATOR
@@ -41,7 +41,7 @@ mkPinningValidator dat () ctx
 
 {-# INLINABLE  mkWrappedmkPinningValidator #-}
 mkWrappedmkPinningValidator :: BuiltinData -> BuiltinData -> BuiltinData -> ()
-mkWrappedmkPinningValidator = wrap mkPinningValidator
+mkWrappedmkPinningValidator = wrapValidator mkPinningValidator
 
 validator :: Validator
 validator = mkValidatorScript $$(compile [|| mkWrappedmkPinningValidator ||])
