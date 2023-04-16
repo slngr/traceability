@@ -222,8 +222,8 @@ async function onPin() {
 		.complete();
 	signAndSubmitCardanoTx(tx);
 
-	ownerText.value = "";
-	locationText.value = "";
+	ownerText.value = "Write the owner’s public key hash or leave empty to make unhidable";
+	locationText.value = "Click on the map or input the desired latitude and longitude manually";
 }
 
 async function onHide() {
@@ -245,7 +245,7 @@ async function onHide() {
 		console.log("That UTxO is not found");
 	}
 
-	referenceText.value = "";
+	referenceText.value = "Write the reference of the pin to hide";
 }
 
 function onShow() {
