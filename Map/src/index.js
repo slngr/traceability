@@ -16,15 +16,12 @@ const layer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var popup = L.popup();
 
 function onMapClick(e) {
-
 	var location = (e.latlng.lat).toFixed(6).toString() + " " + (e.latlng.lng.toFixed(6)).toString();
 	document.getElementById("pinLocationText").value = location;
-
 	popup
 		.setLatLng(e.latlng)
 		.setContent(location)
 		.openOn(map);
-
 }
 
 map.on('click', onMapClick);
@@ -86,9 +83,7 @@ async function getStatus() {
 	const pkh = await getCardanoPKH();
 	const utxos = await lucid.wallet.getUtxos();
 	const lovelace = utxos.reduce((acc, utxo) => acc + utxo.assets.lovelace, 0n);
-
 	const pins = await pinningUTxOs();
-
 	return {
 		cardanoPKH: pkh,
 		cardanoBalance: lovelace,
@@ -153,8 +148,8 @@ async function setStatus() {
 		addCopyCell(tr, x.utxo.txHash + '#' + x.utxo.outputIndex);
 		addCopyCell(tr, x.datum.owner);
 
-		const dLat = (Number(x.datum.latitude) / million).toFixed(6)
-		const dLng = (Number(x.datum.longitude) / million).toFixed(6)
+		const dLat = (Number(x.datum.latitude) / million).toFixed(6);
+		const dLng = (Number(x.datum.longitude) / million).toFixed(6);
 		addCell(tr, (dLat).toString() + ' ' + (dLng).toString());
 	}
 }
@@ -206,9 +201,8 @@ async function onPin() {
 
 	const locationText = document.getElementById('pinLocationText');
 	const location = locationText.value;
-
-	const latitude = BigInt(Math.round(Number(location.split(' ')[0]) * million))
-	const longitude = BigInt(Math.round(Number(location.split(' ')[1]) * million))
+	const latitude = BigInt(Math.round(Number(location.split(' ')[0]) * million));
+	const longitude = BigInt(Math.round(Number(location.split(' ')[1]) * million));
 
 	const d = {
 		owner: owner,
@@ -237,7 +231,7 @@ async function onHide() {
 
 	const referenceText = document.getElementById('hideReferenceText');
 	const reference = referenceText.value;
-
+	
 	const utxo = await findUTxO(reference);
 	if (utxo) {
 		const tx = await lucid
@@ -260,7 +254,7 @@ function onShow() {
 	for (var r = 0, n = table.rows.length; r < n; r++)
 		pins.push(table.rows[r].cells[2].innerHTML);
 	if (!pins.length) {
-		console.log("No data currently available")
+		console.log("No data is currently available");
 	} else {
 		map.remove();
 		map = L.map('map').setView([Number(pins[pins.length - 1].split(' ')[0]), Number(pins[pins.length - 1].split(' ')[1])], 2); // This recenters the map on the latest pin
@@ -274,8 +268,6 @@ function onShow() {
 		}
 	}
 }
-
-
 
 function onCopy(elt) {
 	navigator.clipboard.writeText(document.getElementById(elt).firstChild.textContent);
