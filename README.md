@@ -10,7 +10,7 @@ In order to ensure maximum on-chain readability, pinning transactions are constr
 
 How to use:
 
-Insert your Blockfrost preview API key in line 54 of Map/src/index.js
+Insert your Blockfrost preview API key in line 51 of Map/src/index.js
 
 Put the Map directory inside your Plutus Pioneer Program 4 Docker Workspace, cd there then npm install and npm start
 
